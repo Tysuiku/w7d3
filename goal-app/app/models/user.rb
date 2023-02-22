@@ -9,6 +9,8 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
-    validates :username, :password, presence: true 
+    validates :username, :password, presence: true,uniqueness: true 
     validates :password, length:{minimum: 6 }
+
+
 end
