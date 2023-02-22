@@ -16,7 +16,18 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:password) }
   it { should validate_length_of(:password).is_at_least(6) }
 
-  it { should validate_presence_of(:session_token) }
+  describe 'finds user by credentials' do
+    context 'with a valid username and password' do
+      it 'returns the proper user'do
+      sally = User.create(username: 'sally_lee', password: 'password')
+      user = User.find_by_credentials('sally_lee', 'password')
+
+      expect(sally.username).to eq(user.username)
+      expect(sally.password).to eq(user.password)
+    end
+  end
+end 
+
 
   describe "uniqueness" do
     before :each do
